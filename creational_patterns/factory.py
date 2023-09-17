@@ -14,7 +14,7 @@ class Truck(Transport):
 
 class Ship(Transport):
     def deliver(self, package):
-        print(f"Ship delivering package {package}")
+        print(f"Ship delivering package: {package}")
 
 
 class TransportFactory(ABC):
@@ -28,5 +28,6 @@ class TransportFactory(ABC):
             raise Exception('Invalid transport type')
 
 
-TransportFactory.create_transport('truck').deliver('Laptops')
-TransportFactory.create_transport('ship').deliver('Phones')
+if __name__ == '__main__':
+    TransportFactory.create_transport('truck').deliver('Laptops')
+    TransportFactory.create_transport('ship').deliver('Phones')
