@@ -14,6 +14,7 @@ The Flyweight Pattern suggests that you separate the intrinsic state (shared and
 characters (e.g. font, size), while the extrinsic state represents the context-specific properties
 (e.g. position on the screen)
 """
+from typing import Dict, Tuple
 
 
 class Character:
@@ -29,7 +30,7 @@ class Character:
 
 class CharacterFactory:
     def __init__(self):
-        self.characters = {}
+        self.characters: Dict[Tuple, Character] = {}
 
     def get_character(self, char, font, size, color):
         key = (char, font, size, color)
