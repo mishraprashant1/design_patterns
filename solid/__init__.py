@@ -32,4 +32,8 @@ Questions to ask for each principle:
 - Do we have fat interfaces with unnecessary methods?
 5. Dependency inversion principle (DIP):
 - Are high-level modules depending on low-level modules? Like Payment Service depending on Payment Processor.
+
+Good resources:
+- https://realpython.com/solid-principles-python/
+- https://www.youtube.com/watch?v=B3zrIwz_t4M&list=PLTCrU9sGybupCpY20eked6blbHI4zZ55k
 """
