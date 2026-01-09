@@ -79,3 +79,68 @@ if __name__ == "__main__":
     weather_data.remove_observer(statistics_display)
 
     weather_data.set_measurements(79, 75, 29.2)
+
+# One more example
+
+from abc import ABC, abstractmethod
+
+
+class Observer(ABC):
+    @abstractmethod
+    def notify(self, temperature, wind_speed, visibility):
+        pass
+
+
+class ATC(Observer):
+    def notify(self, temperature, wind_speed, visibility):
+        if visibility < 5 or wind_speed > 25:
+            print("Bad weather for air crafts")
+        else:
+            print("Good weather for air crafts")
+
+
+class ColdStorage(Observer):
+    def notify(self, temperature, wind_speed, visibility):
+        if temperature > 35:
+            print("Turning on the wind blowers")
+        else:
+            print("Weather is pleasant for cold storage")
+
+
+class HighwayManagement(Observer):
+    def notify(self, temperature, wind_speed, visibility):
+        if visibility < 2:
+            print("Bad visibility for driving on highway")
+        elif visibility < 5:
+            print("Descent visibility for driving on highway")
+        else:
+            print("Very Good visibility for driving on highway")
+
+
+class Subject:
+    def __init__(self):
+        self.observers = []
+
+    def register(self, observer):
+        self.observers.append(observer)
+
+    def publish(self, temperature, wind_speed, visibility):
+        for observer in self.observers:
+            observer.notify(temperature, wind_speed, visibility)
+
+
+if __name__ == "__main__":
+    obj_1 = ATC()
+    obj_2 = ColdStorage()
+    obj_3 = HighwayManagement()
+
+    observer_1 = Subject()
+    observer_2 = Subject()
+
+    observer_1.register(obj_1)
+    observer_1.register(obj_2)
+
+    observer_2.register(obj_3)
+
+    observer_1.publish(temperature=40, wind_speed=25, visibility=5)
+    observer_2.publish(temperature=50, wind_speed=50, visibility=1)
