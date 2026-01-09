@@ -56,3 +56,44 @@ if __name__ == "__main__":
 
     app.set_strategy(ScenicRouteStrategy())
     print(app.build_route("Chicago", "Miami"))
+
+# One more example
+
+class LoginStrategy(ABC):
+    @abstractmethod
+    def login(self, credentials):
+        pass
+
+
+class GoogleLoginStrategy(LoginStrategy):
+    def login(self, credentials):
+        print("Logging in with Google")
+
+
+class FacebookLoginStrategy(LoginStrategy):
+    def login(self, credentials):
+        print("Logging in with Facebook")
+
+
+class AppleLoginStrategy(LoginStrategy):
+    def login(self, credentials):
+        print("Logging in with Apple")
+
+
+class LoginContext:
+    def __init__(self, strategy: LoginStrategy):
+        self.strategy = strategy
+
+    def set_strategy(self, strategy: LoginStrategy):
+        self.strategy = strategy
+
+    def login(self, credentials):
+        self.strategy.login(credentials)
+
+
+if __name__ == "__main__":
+    context = LoginContext(GoogleLoginStrategy())
+    context.login({"token": "google-token"})
+
+    context.set_strategy(AppleLoginStrategy())
+    context.login({"token": "apple-token"})
