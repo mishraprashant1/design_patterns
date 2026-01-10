@@ -65,3 +65,38 @@ if __name__ == "__main__":
     print("Bold text:", bold_text.display())  # Output: Bold text: <b>Hello, World!</b>
     print("Italic and colored text:", italic_and_color_text.display())
     # Output: Italic and colored text: <span style="color:blue;"><i>Hello, World!</i></span>
+
+
+# One more example
+from abc import ABC, abstractmethod
+
+class Coffee(ABC):
+    @abstractmethod
+    def cost(self):
+        pass
+    
+class SimpleCoffee(Coffee):
+    def cost(self):
+        return 50
+        
+
+class MilkDecorator(Coffee):
+    def __init__(self, coffee):
+        self.coffee = coffee
+
+    def cost(self):
+        return self.coffee.cost() + 30
+
+class SugarDecorator(Coffee):
+    def __init__(self, coffee):
+        self.coffee = coffee
+
+    def cost(self):
+        return self.coffee.cost() + 10
+
+if __name__ == "__main__":
+    coffee = SimpleCoffee()
+    add_milk = MilkDecorator(coffee)
+    add_sugar = SugarDecorator(add_milk)
+
+    print(add_sugar.cost())
